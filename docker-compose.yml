@@ -1,0 +1,26 @@
+version: '3.7'
+services:
+  server:
+    build:
+      dockerfile: server.Dockerfile
+      context: ./
+    container_name: word-of-wisdom_server
+    ports:
+      - "80:80"
+    networks:
+      - net
+    env_file:
+      - env/server.env
+  client:
+    build:
+      dockerfile: client.Dockerfile
+      context: ./
+    container_name: word-of-wisdom_client
+    networks:
+      - net
+    env_file:
+      - env/client.env
+
+networks:
+  net:
+    driver: bridge
